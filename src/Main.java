@@ -17,7 +17,7 @@ public class Main {
             );
         }
         long task1 = persons.stream().filter(person -> person.getAge() < 18).count();
-        System.out.println("Кол-во несовершеннолетних " + task1);
+        ////System.out.println("Кол-во несовершеннолетних " + task1);
 
         List<String> task2 = persons.stream()
                 .filter(person -> person.getAge() >= 18)
@@ -27,9 +27,10 @@ public class Main {
         //System.out.println("Лица призывного возраста:\n" + task2);
 
         List<Person> task3 = persons.stream()
-                .filter(person -> person.getSex() == Sex.MAN && person.getAge() >= 18 && person.getAge() <= 65)
-                .filter(person -> person.getSex() == Sex.WOMAN && person.getAge() >= 18 && person.getAge() <= 60)
                 .filter(person -> person.getEducation() == Education.HIGHER)
+                .filter(person -> person.getAge() >= 18)
+                .filter(person -> person.getSex() == Sex.MAN && person.getAge() <= 65
+                        || person.getSex() == Sex.WOMAN && person.getAge() <= 60)
                 .sorted(Comparator.comparing(Person::getFamily))
                 .collect(Collectors.toList());
         System.out.println("Работоспособных с вышкой: \n" + task3);
